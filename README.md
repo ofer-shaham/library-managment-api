@@ -43,7 +43,7 @@ tech stack:
 
 this project is a work in progress
 -----------
-- based upon flaskr example which had working setup for running tests using pytest
+- the code is based upon [flaskr](https://github.com/pallets-eco/flask-sqlalchemy/tree/main/examples/flaskr) example which had working setup for running tests using pytest
 
 
 Todos:
