@@ -1,0 +1,22 @@
+{
+    "python.testing.pytestArgs": [],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#444000",
+        "activityBar.foreground": "#fcfcfc",
+        "activityBar.border": "#555000"
+    },
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "localhost",
+            "database": "mydb",
+            "username": "myuser",
+            "password": "mypassword"
+        }
+    ]
+}
