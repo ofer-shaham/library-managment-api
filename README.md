@@ -6,7 +6,7 @@ Done:
 - testing: 
 ```sh
 coverage run -m pytest tests/test_book.py tests/test_db.py  
-ptw --runner "pytest --testmon" #run in watch mode
+ptw --runner "pytest -x --testmon" #run in watch mode
 
 ```
 
@@ -21,7 +21,7 @@ flaskr
 │   ├── __init__.py
 │   ├── Loan.py
 │   ├── Member.py
-│   └── views.py <------- routes are here
+│   └── routes.py
 └── utils
     ├── constants.py
     ├── __init__.py
