@@ -90,9 +90,10 @@ def test_get_books(client, auth, app):
 
         # assert that the response has a 200 status code
         assert response.status_code == 200
+        assert response.json['success'] == True
 
         # assert that the response contains the test book
-        assert response.json[0]['title'] == book.to_dict()['title']
+        assert response.json['result'][0]['title'] == book.to_dict()['title']
 
 
 def test_get_book(client, auth, app):
@@ -106,10 +107,11 @@ def test_get_book(client, auth, app):
 
         # assert that the response has a 200 status code
         assert response.status_code == 200
+        assert response.json['success'] == True
 
         # assert that the response contains the test book
-        assert response.json['id'] == 1
-        assert response.json['ISBN'] == '1234567892'
+        assert response.json['result']['id'] == 1
+        assert response.json['result']['ISBN'] == '1234567892'
 
 
 def test_update_book(client, auth, app):
@@ -160,17 +162,20 @@ def test_delete_book(client, auth, app):
     }
 
     with app.app_context():
+        book_id = 1
         # add the test book to the library
         client.post('/api/books', data=json.dumps(book_data),
                     content_type='application/json')
 
         # send a DELETE request to the /books/1 endpoint
-        response = client.delete('/api/books/1')
+        response = client.delete('/api/books/{}'.format(book_id))
 
         # assert that the response has a 200 status code
         assert response.status_code == 200
         # assert that the response body is {"success": True}
-        assert response.json == {'success': True}
+        assert response.json['success'] == True
+        assert response.json['result'] == book_id
+
 
 # test filter by combination of book title, author name, and available copy
 

@@ -18,7 +18,10 @@ def books():
     if request.method == 'GET':
         # Return a list of all books
         books = db.session.query(Book).all()
-        return jsonify([book.to_dict() for book in books])
+        # return jsonify([book.to_dict() for book in books])
+        dicted = ([book.to_dict() for book in books])
+        return jsonify({'success': True, 'result': dicted}), 200
+
     elif request.method == 'POST':
         # Add a new book to the library
         data = request.get_json()
@@ -34,7 +37,7 @@ def book(book_id):
     book = db.session.query(Book).get(book_id)
     if request.method == 'GET':
         # Return a single book
-        return jsonify(book.to_dict())
+        return jsonify({'success': True, 'result': book.to_dict()})
     elif request.method == 'PUT':
         # Update an existing book
         data = request.get_json()
@@ -50,7 +53,7 @@ def book(book_id):
         # Delete an existing book
         db.session.delete(book)
         db.session.commit()
-        return jsonify({'success': True}), 200
+        return jsonify({'success': True, 'result': book_id}), 200
 
 
 @bpBooks.route('/books/search', methods=['GET'])
@@ -98,7 +101,7 @@ def search_books():
 def query_copies(book_id):
     book = Book.query.get(book_id)
     if not book:
-        return jsonify({'message': 'Book not found'}), 404
+        return jsonify({'success': False, 'error': 'Book not found'}), 404
     copies = Copy.query.filter_by(book_id=book_id).all()
     output = []
     for copy in copies:
@@ -109,7 +112,7 @@ def query_copies(book_id):
         copy_data['checkout_date'] = copy.checkout_date
         copy_data['due_date'] = copy.due_date
         output.append(copy_data)
-    return jsonify({'copies': output})
+    return jsonify({'success': True, 'result': {'copies': output}})
 
 
 @ bpBooks.route("/books/copies/<int:copy_id>/checkout", methods=["POST"])
