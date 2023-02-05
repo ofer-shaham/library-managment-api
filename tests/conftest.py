@@ -17,7 +17,8 @@ _user2_pass = generate_password_hash("other")
 def app():
     """Create and configure a new app instance for each test."""
     # create the app with common test config
-    app = create_app({"TESTING": True, "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:"})
+    app = create_app(
+        {"TESTING": True, "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:"})
 
     # create the database and load test data
     # set _password to pre-generated hashes, since hashing for each test is slow

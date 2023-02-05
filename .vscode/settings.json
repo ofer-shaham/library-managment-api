@@ -1,9 +1,12 @@
 {
+    "search.collapseResults": "alwaysCollapse",
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "workbench.colorCustomizations": {
-        "activityBar.background": "#444000",
+        "tabs.activeBackground": "#004403",
+        "tab.hoverForeground": "#fcfcfc",
+        "activityBar.background": "#004403",
         "activityBar.foreground": "#fcfcfc",
         "activityBar.border": "#555000"
     },

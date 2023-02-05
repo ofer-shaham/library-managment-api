@@ -6,7 +6,7 @@ from flask.cli import with_appcontext
 from flask_sqlalchemy import SQLAlchemy
 import logging
 logging.basicConfig()
-logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+# logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
 __version__ = (1, 0, 0, "dev")
 

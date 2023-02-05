@@ -11,6 +11,8 @@ from flask import url_for
 
 from flaskr import db
 from flaskr.auth.models import User
+from flask import jsonify
+
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -103,3 +105,13 @@ def logout():
     """Clear the current session, including the stored user id."""
     session.clear()
     return redirect(url_for("index"))
+
+
+@bp.route("/is_admin")
+def is_admin():
+    return jsonify({'success': True, 'result': {"permission_type": "admin" if g.user.is_admin else "user"}})
+
+
+@bp.route("/get_user")
+def get_user():
+    return jsonify({'success': True, 'result': g.user.to_dict()})

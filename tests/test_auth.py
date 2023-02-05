@@ -1,3 +1,4 @@
+import json
 import pytest
 from flask import g
 from flask import session
@@ -11,7 +12,8 @@ def test_register(client, app):
     assert client.get("/auth/register").status_code == 200
 
     # test that successful registration redirects to the login page
-    response = client.post("/auth/register", data={"username": "a", "password": "a"})
+    response = client.post(
+        "/auth/register", data={"username": "a", "password": "a"})
     assert response.headers["Location"] == "/auth/login"
 
     # test that the user was inserted into the database
@@ -73,3 +75,39 @@ def test_logout(client, auth):
     with client:
         auth.logout()
         assert "user_id" not in session
+
+
+@pytest.mark.parametrize(
+    ("username", "password", "is_admin", "id"),
+    (
+        ("admin0", "admin", True, 1),
+        ("user01", "user1", False, 2),
+        ("user02", "user2", False, 3),
+
+    ),
+)
+def test_userId(app, auth, client, username, password, is_admin, id):
+    book_data = {
+        'title': 'Test Book',
+        'author_id': 100,
+        'ISBN': '1234567896',
+        'publication_date': '2020-01-01',
+        'genre': 'Test Genre1',
+    }
+    with app.app_context():
+
+        newUser = User(username=username, password=password, is_admin=is_admin)
+        db.session.add(newUser)
+        db.session.commit()
+
+        response = auth.login(username, password)
+
+        with client:
+            response = client.get(
+                "/auth/get_user"
+            )
+            assert session["user_id"] == response.json['result']['id']
+
+            assert response.status_code == 200
+            assert response.json['result']['is_admin'] == is_admin
+            assert session['user_id'] > 0
