@@ -10,6 +10,7 @@ class User(db.Model):
     password_hash = db.Column(db.String, nullable=False)
 
     posts = db.relationship("Post", back_populates="author")
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
     def set_password(self, value):
         """Store the password as a hash for security."""
@@ -20,3 +21,10 @@ class User(db.Model):
 
     def check_password(self, value):
         return check_password_hash(self.password_hash, value)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'is_admin': self.is_admin,
+        }
