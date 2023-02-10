@@ -15,7 +15,7 @@ from flaskr.utils.utils import convertDateStrToDateObj
 from flaskr.utils.constants import LOAN_PERIOD_DAYS, FEE_DAILY_RATE
 
 
-from Sqlalchemy import event
+from sqlalchemy import event
 
 
 class Loan(Base):
