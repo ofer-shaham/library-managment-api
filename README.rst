@@ -1,3 +1,5 @@
+[![Django CI](https://github.com/ofer-shaham/test/actions/workflows/python-app.yml/badge.svg)](https://github.com/ofer-shaham/test/actions/workflows/python-app.yml)
+
 Flaskr
 ======
 
