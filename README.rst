@@ -57,7 +57,7 @@ Run
 .. code-block:: text
 
     $ export FLASK_APP=flaskr
-    $ export FLASK_DEBUG=development
+    $ export FLASK_ENV=development
     $ flask init-db
     $ flask run
 
@@ -66,7 +66,7 @@ Or on Windows cmd:
 .. code-block:: text
 
     > set FLASK_APP=flaskr
-    > set FLASK_DEBUG=development
+    > set FLASK_ENV=development
     > flask init-db
     > flask run
 

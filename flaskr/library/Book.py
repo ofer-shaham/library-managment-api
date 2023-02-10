@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flaskr import db
+from flaskr.library.basic import db
 from flaskr.library.Author import Author
 from flaskr.library.Base import Base
 from flaskr.library.Copy import Copy
@@ -10,7 +10,7 @@ from flaskr.utils.utils import convertDateStrToDateObj
 
 
 class Book(Base):
-    __tablename__ = 'books'
+    # __tablename__ = 'books'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -20,10 +20,7 @@ class Book(Base):
     genre = db.Column(db.String(255))
 
     author_id = db.Column(db.Integer, db.ForeignKey(
-        "authors.id"), nullable=False)
-    author = db.relationship(
-        "Author", back_populates="books", foreign_keys=[author_id])
-    copies = db.relationship("Copy", back_populates="book")
+        "author.id"), nullable=False)
 
     @staticmethod
     def search(title=None, authorNickname=None, available=None):

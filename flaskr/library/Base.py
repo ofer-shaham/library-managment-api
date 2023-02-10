@@ -1,14 +1,19 @@
 from datetime import datetime
 from datetime import timezone
 
-from flaskr import db
+from flaskr.library.basic import db
 
 
 from sqlalchemy.ext.declarative import declared_attr
+# from sqlalchemy.orm import declarative_base
 
 
 def now_utc():
     return datetime.now(timezone.utc)
+# db.Model
+
+
+# Base0 = declarative_base()
 
 
 class Base(db.Model):

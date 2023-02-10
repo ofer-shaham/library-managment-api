@@ -9,3 +9,10 @@ def convertDateStrToDateObj(engine, dateObject):
                 dateObject, '%Y-%m-%d').date()
 
     return dateObject
+
+
+def convertTimeToEpocSeconds(str, format):
+    epoch = int(datetime.strptime(
+        str, format).timestamp())
+
+    return epoch

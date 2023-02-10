@@ -1,4 +1,5 @@
 from flaskr import create_app
+from flaskr.library.models import *
 
 
 def test_config():
@@ -25,3 +26,11 @@ def test_init_db_command(runner, monkeypatch):
     result = runner.invoke(args=["init-db"])
     assert "Initialized" in result.output
     assert called
+
+
+def test_mock_variable_value(monkeypatch):
+    # mocked return constant to ease testing
+
+    monkeypatch.setattr("flaskr.utils.constants.MAX_CHECKED_OUT", 1)
+    from flaskr.utils.constants import MAX_CHECKED_OUT
+    assert MAX_CHECKED_OUT == 1

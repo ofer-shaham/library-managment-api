@@ -3,24 +3,22 @@ from datetime import timezone
 
 from flask import url_for
 
-from flaskr import db
-from flaskr.auth.models import User
+from flaskr.library.basic import db
+from flaskr.library.Base import Base
+from flaskr.library.User import User
 
 
 def now_utc():
     return datetime.now(timezone.utc)
 
 
-class Post(db.Model):
+class Post(Base):
+    # __tablename__ = "posts"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.ForeignKey(User.id), nullable=False)
+    user_id = db.Column(db.ForeignKey('user.id'), nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=now_utc)
     title = db.Column(db.String, nullable=False)
     body = db.Column(db.String, nullable=False)
-
-    # User object backed by user_id
-    # lazy="joined" means the user is returned with the post in one query
-    user = db.relationship(User, lazy="joined", back_populates="posts")
 
     @property
     def update_url(self):

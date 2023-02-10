@@ -3,14 +3,9 @@ import os
 import click
 from flask import Flask
 from flask.cli import with_appcontext
-from flask_sqlalchemy import SQLAlchemy
-import logging
-logging.basicConfig()
-# logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+from flaskr.library.models import db
 
 __version__ = (1, 0, 0, "dev")
-
-db = SQLAlchemy()
 
 
 def create_app(test_config=None):
@@ -43,11 +38,13 @@ def create_app(test_config=None):
 
     # apply the blueprints to the app
     from flaskr import auth, blog
-    from flaskr import author, library
+    from flaskr import library
 
+    # import bp_books:
+
+    # app.register_blueprint(bp_books)
     app.register_blueprint(auth.bp)
     app.register_blueprint(blog.bp)
-    app.register_blueprint(author.bp)
     app.register_blueprint(library.bpBooks)
 
     # make "index" point at "/", which is handled by "blog.index"
@@ -57,6 +54,7 @@ def create_app(test_config=None):
 
 
 def init_db():
+
     db.drop_all()
     db.create_all()
 

@@ -1,8 +1,8 @@
 import pytest
 
-from flaskr import db
-from flaskr.auth.models import User
-from flaskr.blog.models import Post
+from flaskr.library.models import db
+from flaskr.library.User import User
+from flaskr.library.Post import Post
 
 
 def test_index(client, auth):
@@ -25,6 +25,7 @@ def test_login_required(client, path):
 
 
 def test_user_required(app, client, auth):
+
     # change the post user to another user
     with app.app_context():
         db.session.get(Post, 1).user = db.session.get(User, 2)
@@ -45,6 +46,7 @@ def test_exists_required(client, auth, path):
 
 
 def test_create(client, auth, app):
+    from flaskr.library.Post import Post
     auth.login()
     assert client.get("/create").status_code == 200
     client.post("/create", data={"title": "created", "body": ""})
@@ -56,6 +58,8 @@ def test_create(client, auth, app):
 
 
 def test_update(client, auth, app):
+    from flaskr.library.Post import Post
+
     auth.login()
     assert client.get("/1/update").status_code == 200
     client.post("/1/update", data={"title": "updated", "body": ""})
@@ -72,6 +76,8 @@ def test_create_update_validate(client, auth, path):
 
 
 def test_delete(client, auth, app):
+    from flaskr.library.Post import Post
+
     auth.login()
     response = client.post("/1/delete")
     assert response.headers["Location"] == "/"

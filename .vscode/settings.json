@@ -1,25 +1,15 @@
 {
-    "search.collapseResults": "alwaysCollapse",
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "workbench.colorCustomizations": {
-        "tabs.activeBackground": "#004403",
-        "tab.hoverForeground": "#fcfcfc",
-        "activityBar.background": "#004403",
-        "activityBar.foreground": "#fcfcfc",
-        "activityBar.border": "#555000"
-    },
+    //color
+    "workbench.colorTheme": "Monokai",
     "sqltools.connections": [
         {
             "previewLimit": 50,
-            "server": "localhost",
-            "port": 5432,
-            "driver": "PostgreSQL",
-            "name": "localhost",
-            "database": "mydb",
-            "username": "myuser",
-            "password": "mypassword"
+            "driver": "SQLite",
+            "database": "/tmp/test.sql",
+            "name": "test.db"
         }
     ]
 }

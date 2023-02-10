@@ -7,9 +7,9 @@ from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
 
-from flaskr import db
+from flaskr.library.models import db
 from flaskr.auth.views import login_required
-from flaskr.blog.models import Post
+from flaskr.library.Post import Post
 
 bp = Blueprint("blog", __name__)
 

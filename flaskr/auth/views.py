@@ -2,17 +2,16 @@ import functools
 
 from flask import Blueprint
 from flask import flash
-from flask import g
+from flask import g, session
 from flask import redirect
 from flask import render_template
 from flask import request
-from flask import session
+
+
 from flask import url_for
 
-from flaskr import db
-from flaskr.auth.models import User
-from flask import jsonify
-
+from flaskr.library.models import db
+# from flaskr.auth.User import User
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -32,6 +31,7 @@ def login_required(view):
 
 @bp.before_app_request
 def load_logged_in_user():
+    from flaskr.library.User import User
     """If a user id is stored in the session, load the user object from
     the database into ``g.user``."""
     user_id = session.get("user_id")
@@ -44,6 +44,7 @@ def load_logged_in_user():
 
 @bp.route("/register", methods=("GET", "POST"))
 def register():
+    from flaskr.library.User import User
     """Register a new user.
 
     Validates that the username is not already taken. Hashes the
@@ -76,6 +77,7 @@ def register():
 
 @bp.route("/login", methods=("GET", "POST"))
 def login():
+    from flaskr.library.User import User
     """Log in a registered user by adding the user id to the session."""
     if request.method == "POST":
         username = request.form["username"]
@@ -86,6 +88,7 @@ def login():
 
         if user is None:
             error = "Incorrect username."
+
         elif not user.check_password(password):
             error = "Incorrect password."
 
@@ -105,13 +108,3 @@ def logout():
     """Clear the current session, including the stored user id."""
     session.clear()
     return redirect(url_for("index"))
-
-
-@bp.route("/is_admin")
-def is_admin():
-    return jsonify({'success': True, 'result': {"permission_type": "admin" if g.user.is_admin else "user"}})
-
-
-@bp.route("/get_user")
-def get_user():
-    return jsonify({'success': True, 'result': g.user.to_dict()})

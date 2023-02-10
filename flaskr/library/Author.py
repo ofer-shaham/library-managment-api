@@ -1,11 +1,11 @@
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from flaskr.library.Base import Base
-from flaskr import db
+from flaskr.library.basic import db
 
 
 class Author(Base):
-    __tablename__ = 'authors'
+    # __tablename__ = 'authors'
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String, nullable=False)
@@ -13,9 +13,10 @@ class Author(Base):
     nickname = db.Column(db.String, nullable=False)
 
     # relationship
-    books = db.relationship("Book", back_populates="author")
+    # books = db.relationship("Book", back_populates="author")
 
     # to_dict
+
     def to_dict(self):
         return {
             'id': self.id,

@@ -1,13 +1,16 @@
+from flaskr.library.Post import Post
+from flaskr.library.User import User
+from flaskr.library.Base import Base
+
 from datetime import datetime
 
 import pytest
 from werkzeug.security import generate_password_hash
 
 from flaskr import create_app
-from flaskr import db
+# from  flaskr.library.basic import db
 from flaskr import init_db
-from flaskr.auth.models import User
-from flaskr.blog.models import Post
+from flaskr.library.models import db
 
 _user1_pass = generate_password_hash("test")
 _user2_pass = generate_password_hash("other")
@@ -24,7 +27,8 @@ def app():
     # set _password to pre-generated hashes, since hashing for each test is slow
     with app.app_context():
         init_db()
-        user = User(username="test", password_hash=_user1_pass)
+        user = User(username="test", password_hash=_user1_pass,
+                    email="efpyi@example.com")
         db.session.add_all(
             (
                 user,
