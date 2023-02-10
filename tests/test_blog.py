@@ -24,10 +24,10 @@ def test_login_required(client, path):
     assert response.headers["Location"] == "/auth/login"
 
 
-def test_author_required(app, client, auth):
-    # change the post author to another user
+def test_user_required(app, client, auth):
+    # change the post user to another user
     with app.app_context():
-        db.session.get(Post, 1).author = db.session.get(User, 2)
+        db.session.get(Post, 1).user = db.session.get(User, 2)
         db.session.commit()
 
     auth.login()

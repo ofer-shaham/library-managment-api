@@ -22,21 +22,21 @@ def index():
     return render_template("blog/index.html", posts=posts)
 
 
-def get_post(id, check_author=True):
-    """Get a post and its author by id.
+def get_post(id, check_user=True):
+    """Get a post and its user by id.
 
     Checks that the id exists and optionally that the current user is
-    the author.
+    the user.
 
     :param id: id of post to get
-    :param check_author: require the current user to be the author
-    :return: the post with author information
+    :param check_user: require the current user to be the user
+    :return: the post with user information
     :raise 404: if a post with the given id doesn't exist
-    :raise 403: if the current user isn't the author
+    :raise 403: if the current user isn't the user
     """
     post = db.get_or_404(Post, id, description=f"Post id {id} doesn't exist.")
 
-    if check_author and post.author != g.user:
+    if check_user and post.user != g.user:
         abort(403)
 
     return post
@@ -57,7 +57,7 @@ def create():
         if error is not None:
             flash(error)
         else:
-            db.session.add(Post(title=title, body=body, author=g.user))
+            db.session.add(Post(title=title, body=body, user=g.user))
             db.session.commit()
             return redirect(url_for("blog.index"))
 
@@ -67,7 +67,7 @@ def create():
 @bp.route("/<int:id>/update", methods=("GET", "POST"))
 @login_required
 def update(id):
-    """Update a post if the current user is the author."""
+    """Update a post if the current user is the user."""
     post = get_post(id)
 
     if request.method == "POST":
@@ -95,7 +95,7 @@ def delete(id):
     """Delete a post.
 
     Ensures that the post exists and that the logged in user is the
-    author of the post.
+    user of the post.
     """
     post = get_post(id)
     db.session.delete(post)

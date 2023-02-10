@@ -32,7 +32,7 @@ def app():
                 Post(
                     title="test title",
                     body="test\nbody",
-                    author=user,
+                    user=user,
                     created=datetime(2018, 1, 1),
                 ),
             )

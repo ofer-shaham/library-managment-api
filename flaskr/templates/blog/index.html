@@ -13,9 +13,9 @@
       <header>
         <div>
           <h1>{{ post['title'] }}</h1>
-          <div class="about">by {{ post.author.username }} on {{ post.created.strftime('%Y-%m-%d') }}</div>
+          <div class="about">by {{ post.user.username }} on {{ post.created.strftime('%Y-%m-%d') }}</div>
         </div>
-        {% if g.user['id'] == post['author_id'] %}
+        {% if g.user['id'] == post['user_id'] %}
           <a class="action" href="{{ post.update_url }}">Edit</a>
         {% endif %}
       </header>

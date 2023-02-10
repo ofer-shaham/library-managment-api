@@ -9,7 +9,8 @@ class User(db.Model):
     username = db.Column(db.String, unique=True, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
 
-    posts = db.relationship("Post", back_populates="author")
+    posts = db.relationship("Post", back_populates="user")
+
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
     def set_password(self, value):

@@ -13,14 +13,14 @@ def now_utc():
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.ForeignKey(User.id), nullable=False)
+    user_id = db.Column(db.ForeignKey(User.id), nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=now_utc)
     title = db.Column(db.String, nullable=False)
     body = db.Column(db.String, nullable=False)
 
-    # User object backed by author_id
+    # User object backed by user_id
     # lazy="joined" means the user is returned with the post in one query
-    author = db.relationship(User, lazy="joined", back_populates="posts")
+    user = db.relationship(User, lazy="joined", back_populates="posts")
 
     @property
     def update_url(self):
