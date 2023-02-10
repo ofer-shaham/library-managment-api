@@ -84,10 +84,8 @@ def generateData():
 
 
 def create_app(test_config=None):
-    # app = Flask(__name__, instance_relative_config=True)
-    app = Flask(__name__)  # , instance_relative_config=True)
-    # app.cli.add_command(init_db_command)
-
+     app = Flask(__name__)  # , instance_relative_config=True)
+ 
     if test_config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile("config.py", silent=True)
@@ -95,16 +93,8 @@ def create_app(test_config=None):
         # load the test config if passed in
         app.config.update(test_config)
     if __name__ == "__main__":
-        # replace with your database connection string
-        # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-        db.init_app(app)
-
-        # app = create_app(
-        #     {"TESTING": True, "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:"})
-
-        # # create the database and load test data
-        # # set _password to pre-generated hashes, since hashing for each test is slow
-
+         db.init_app(app)
+ 
     return app
 
 
@@ -120,9 +110,7 @@ def test():
     app = create_app(
         {"TESTING": True, "SQLALCHEMY_DATABASE_URI": file})
 
-    # create the database and load test data
-    # set _password to pre-generated hashes, since hashing for each test is slow
-
+ 
     with app.app_context():
         init_db()
         # user = User(name="test")
@@ -137,9 +125,7 @@ def test():
         )
         result = db.session.commit()
         print(result)
-        # db.session.close()
-        # db.session()
-        # Return a list of all books
+ 
         book = db.session.query(Book).first()
         if book:
             book.to_dict()
@@ -153,13 +139,7 @@ def test():
         else:
             print("No books found")
 
-        # print(jsonify({'success': True, 'result': dicted}))
-
+ 
 
 test()
-# @click.command("init-db")
-# @with_appcontext
-# def init_db_command():
-#     """Clear existing data and create new tables."""
-#     init_db()
-#     click.echo("Initialized the database.")
+ 

@@ -1,10 +1,24 @@
 [![Fjlask CI](https://github.com/ofer-shaham/test/actions/workflows/python-app.yml/badge.svg)](https://github.com/ofer-shaham/test/actions/workflows/python-app.yml)
 
+## Library managment system
+
+---
+
+Tools:
+
+- flask
+- sqlalchemy
+- pytest
+
+---
+
+---
+
 ```python
 #install
 python3 -m venv venv
 . venv/bin/activate
-pip install -r requirements.txt 
+pip install -r requirements.txt
 
 #test
 pytest
@@ -19,7 +33,6 @@ set FLASK_APP=flaskr
 set FLASK_ENV=development
 flask init-db
 flask run
-    
-    
-``` 
 
+
+```
