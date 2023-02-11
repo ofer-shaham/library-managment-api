@@ -36,6 +36,6 @@ flask run
 
 
 ```
-- The library requirements were tested here: [link](https://github.com/ofer-shaham/library-managment-api/blob/main/tests/test_book.py)
-
-- This project is based upon the layout of the following project: [link](https://github.com/pallets-eco/flask-sqlalchemy/tree/main/examples/flaskr)
+- library API tests: [link](https://github.com/ofer-shaham/library-managment-api/blob/main/tests/test_book.py)
+- library models: [link](https://github.com/ofer-shaham/library-managment-api/tree/main/flaskr/library)
+- original project layout: [link](https://github.com/pallets-eco/flask-sqlalchemy/tree/main/examples/flaskr)
